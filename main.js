@@ -25,7 +25,7 @@ var stimuli = all_stim[condition]
 
 var done = {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: "done",
+    stimulus: "Thank you for completing the survey. We take your compensation and time seriously! The email for the main experimenter is maxs@mit.edu<br> If you have problems submitting this task, or if it takes much more time than expected, you can either contact us directly through the Prolific portal, or email us with your Prolific ID and the subject line <i>Human experiment compensation for explanation experiment. In either case, we will respond to your messages within 24 - 48 hours.",
 
     on_start: function() {
         saveData(id, jsPsych.data.get().csv());
@@ -51,11 +51,9 @@ for (var t = 0; t < n_trials; t++) {
 
     var trial = {
         type: jsPsychHtmlSliderResponse,
-        // stimulus: format_text(text),
         stimulus: stimuli[t],
         require_movement: true,
-
-        //// extra stuff to save
+        labels: ["Explanation 1", "No preference for either of the explanations", "Explanation 2"],
         data: {
             stimulus_id: t,
         },
