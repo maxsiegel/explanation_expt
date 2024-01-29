@@ -22,14 +22,32 @@ var stimuli = all_stim[condition]
 // stimuli = jsPsych.randomization.shuffle(stimuli;    //
 /////////////////////////////////////////////////////////
 
+var debrief = {
+    type: jsPsychSurveyText,
+    questions: [{
+            prompt: 'How was your experience completing this task? Do you have any comments?',
+            rows: 10
+        },
+        {
+            prompt: "Please enter your Prolific ID.",
+            rows: 1
+        }
+    ]
+}
 
 var done = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: "Thank you for completing the survey. We take your compensation and time seriously! The email for the main experimenter is maxs@mit.edu<br> If you have problems submitting this task, or if it takes much more time than expected, you can either contact us directly through the Prolific portal, or email us with your Prolific ID and the subject line <i>Human experiment compensation for explanation experiment. In either case, we will respond to your messages within 24 - 48 hours.",
+    type: jsPsychHtmlButtonResponse,
+    stimulus: "Thank you for completing the survey. We take your compensation and time seriously! The email for the main experimenter is maxs@mit.edu<br> If you have problems submitting this task, or if it takes much more time than expected, you can either contact us directly through the Prolific portal, or email us with your Prolific ID and the subject line <i>Human experiment compensation for explanation experiment</i>. In either case, we will respond to your messages within 24 - 48 hours.<br><br><br><br>Click the button below to submit your data and return to Prolific.",
 
     on_start: function() {
         saveData(id, jsPsych.data.get().csv());
+    },
+
+    choices: ["Return"],
+    on_finish: function() {
+        location.href = "https://app.prolific.com/submissions/complete?cc=C14C0ZL1"
     }
+
 }
 
 var trials = [];
@@ -91,6 +109,6 @@ var trial_proc = {
     timeline: trials,
 }
 
-timeline = [start, instructions, trial_proc, done]
+timeline = [start, instructions, trial_proc, debrief, done]
 
 jsPsych.run(timeline);
