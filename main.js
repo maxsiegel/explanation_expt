@@ -47,6 +47,11 @@ var start = {
     }
 }
 
+var instructions = {
+    type: jsPsychHtmlKeyboardResponse,
+    // stimulus: "In this experiment, you will be reading short stories. <br><br> In each one, you will see two possible explanations that one person could give to another person.<br><br>Your task is to move a slider to indicate which of these explanations you would give, from <br><br>Definitely <b style='text-align:left'>Explanation 1</b> <br>to <br>Definitely <b>Explanation 2</b>."
+    stimulus: "In this experiment, you will be reading short stories. <br><br> In each one, you will see two possible explanations that one person could give to another person.<br><br>Your task is to move a slider to indicate which of these explanations you would give,<br><br> from <b>Definitely Explanation 1</b> to <b>Definitely Explanation 2</b>.<br><br><br>Ready to start? <br><br>Press any key to continue."
+}
 for (var t = 0; t < n_trials; t++) {
 
     var trial = {
@@ -86,6 +91,6 @@ var trial_proc = {
     timeline: trials,
 }
 
-timeline = [start, trial_proc, done]
+timeline = [start, instructions, trial_proc, done]
 
 jsPsych.run(timeline);
